@@ -1,20 +1,26 @@
 import { browser, element, by } from 'protractor';
+import { allure } from './allure-reporter';
+import { DashboardPage } from './dashboard.po';
+import { HeroesPage } from './heroes.po';
 
 export class DefaultPage {
 	header = element(by.tagName('h1'));
 	dashboardNav = element(by.linkText('Dashboard'));
 	heroesNav = element(by.linkText('Heroes'));
 
-	navigateTo() {
-		return browser.get('/');
+	navigateTo(): void {
+		allure.step('Get page', async () =>
+			await browser.get('/'));
 	}
 
-	viewDashboard() {
+	viewDashboard(): DashboardPage {
 		this.dashboardNav.click();
+		return new DashboardPage();
 	}
 
-	viewHeroes() {
+	viewHeroes(): HeroesPage {
 		this.heroesNav.click();
+		return new HeroesPage();
 	}
 
 	getHeaderText() {

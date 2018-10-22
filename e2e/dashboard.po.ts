@@ -1,4 +1,4 @@
-import { element, by, WebElement } from 'protractor';
+import { element, by } from 'protractor';
 
 export class DashboardPage {
 	header = element(by.tagName('h3'));
