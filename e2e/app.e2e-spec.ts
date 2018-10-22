@@ -1,14 +1,14 @@
-import { BlankPage } from './app.po';
+import { DefaultPage } from './app.po';
 
 describe('blank App', () => {
-	let page: BlankPage;
+	let page: DefaultPage;
 
 	beforeEach(() => {
-		page = new BlankPage();
+		page = new DefaultPage();
 	});
 
 	it('should display message saying app works', () => {
 		page.navigateTo();
-		expect(page.getParagraphText()).toEqual('Tour of Heroes');
+		expect(page.getHeaderText()).toEqual('Tour of Heroes');
 	});
 });
