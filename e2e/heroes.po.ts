@@ -5,4 +5,8 @@ export class HeroesPage {
 	heroes = element.all(by.tagName('li'));
 	addHeroButton = element(by.partialButtonText('Add'));
 	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
+
+	async getHeader(): Promise<string> {
+		return await this.header.getText();
+	}
 }
