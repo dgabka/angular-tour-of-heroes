@@ -40,6 +40,7 @@
     "@types/node": "^6.0.103",
     "codelyzer": "^4.2.1",
     "concurrently": "^3.5.1",
+    "jasmine-allure2-reporter": "^1.2.0",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",
