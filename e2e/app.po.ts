@@ -8,9 +8,9 @@ export class DefaultPage {
 	dashboardNav = element(by.linkText('Dashboard'));
 	heroesNav = element(by.linkText('Heroes'));
 
-	navigateTo(): void {
-		allure.step('Get page', async () =>
-			await browser.get('/'));
+	async navigateTo(): Promise<void> {
+		await allure.step('Get homepage', () =>
+			browser.get('/'));
 	}
 
 	viewDashboard(): DashboardPage {

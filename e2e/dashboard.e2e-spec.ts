@@ -6,7 +6,7 @@ describe('Dashboard', () => {
 	let dashboard: DashboardPage;
 	let page: DefaultPage;
 
-	beforeAll(() => {
+	beforeEach(() => {
 		page = new DefaultPage();
 		dashboard = new DashboardPage();
 		page.navigateTo();
@@ -22,7 +22,10 @@ describe('Dashboard', () => {
 	});
 
 	it('should navigate to "Hero details" when hero is clicked', () => {
-		dashboard.clickOnFirstHero();
-		expect(browser.getCurrentUrl()).toContain('detail');
+		for (let i = 0; i < 4; i++) {
+			page.navigateTo();
+			dashboard.clickOnHero(i);
+			expect(browser.getCurrentUrl()).toContain('detail');
+		}
 	});
 });

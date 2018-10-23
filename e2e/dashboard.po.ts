@@ -22,6 +22,12 @@ export class DashboardPage {
 			this.topHeroes.first().getText());
 	}
 
+	clickOnHero(index: number) {
+		allure.step(`Click on hero number ${index}`, () => {
+			this.topHeroes.get(index).click();
+		});
+	}
+
 	clickOnFirstHero(): void {
 		allure.step('Click on first hero', () =>
 			this.topHeroes.first().click());
