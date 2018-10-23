@@ -23,7 +23,7 @@ export class DashboardPage {
 	}
 
 	clickOnHero(index: number) {
-		allure.step(`Click on hero number ${index}`, () => {
+		allure.step(`Click on hero number ${index + 1}`, () => {
 			this.topHeroes.get(index).click();
 		});
 	}
