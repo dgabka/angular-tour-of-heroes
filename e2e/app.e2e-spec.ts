@@ -6,23 +6,21 @@ import { HeroesPage } from './heroes.po';
 describe('Tour Of Heroes App', () => {
 	let page: DefaultPage;
 
-	beforeEach(() => {
+	beforeAll(() => {
 		page = new DefaultPage();
+		page.navigateTo();
 	});
 
 	it('should display header', () => {
-		page.navigateTo();
 		expect(page.getHeaderText()).toEqual('Tour of Heroes');
 	});
 
 	it('should display active navigation buttons', () => {
-		page.navigateTo();
 		expect(page.heroesNav.isEnabled()).toBe(true);
 		expect(page.dashboardNav.isEnabled()).toBe(true);
 	});
 
 	it('should display Dashboard by default', () => {
-		page.navigateTo();
 		expect(browser.getCurrentUrl()).toContain('dashboard');
 		const dashboard: DashboardPage = new DashboardPage();
 		expect(dashboard.getHeader()).toBe('Top Heroes');
@@ -32,7 +30,6 @@ describe('Tour Of Heroes App', () => {
 		let heroes: HeroesPage;
 		let dashboard: DashboardPage;
 
-		page.navigateTo();
 		heroes = page.viewHeroes();
 		expect(heroes.getHeader()).toBe('My Heroes');
 		dashboard = page.viewDashboard();
