@@ -1,5 +1,6 @@
 import { DashboardPage } from './dashboard.po';
 import { DefaultPage } from './app.po';
+import { browser } from 'protractor';
 
 describe('Dashboard', () => {
 	let dashboard: DashboardPage;
@@ -15,13 +16,14 @@ describe('Dashboard', () => {
 		expect(dashboard.topHeroes.count()).toEqual(4);
 	});
 
-	it('should display "Hero Search" component', () => {
-		expect(dashboard.searchComponent.isPresent()).toBe(true);
-		expect(dashboard.searchInput.isPresent()).toBe(true);
+	it('should navigate to "Hero details" when hero is clicked', () => {
+		dashboard.topHeroes.first().click();
+		expect(browser.getCurrentUrl()).toContain('detail');
 	});
 
-	it('should display search results when provided with input', () => {
-		dashboard.search('a');
-		expect(dashboard.searchResult.count()).toBeGreaterThanOrEqual(1);
+	it('should display "Hero Search" component', () => {
+		page.navigateTo();
+		expect(dashboard.searchComponent.isPresent()).toBe(true);
+		expect(dashboard.searchInput.isPresent()).toBe(true);
 	});
 });
