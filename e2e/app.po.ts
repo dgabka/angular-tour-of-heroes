@@ -14,12 +14,14 @@ export class DefaultPage {
 	}
 
 	viewDashboard(): DashboardPage {
-		this.dashboardNav.click();
+		allure.step('Go to dashboard', () =>
+			this.dashboardNav.click());
 		return new DashboardPage();
 	}
 
 	viewHeroes(): HeroesPage {
-		this.heroesNav.click();
+		allure.step('Go to heroes list', () =>
+			this.heroesNav.click());
 		return new HeroesPage();
 	}
 

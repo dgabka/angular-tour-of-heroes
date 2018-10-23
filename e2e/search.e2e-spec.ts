@@ -13,13 +13,15 @@ describe('Search component', () => {
 	});
 
 	it('should display search results when provided with input', () => {
-		dashboard.topHeroes.first().getText().then(string => dashboard.search(string));
+		dashboard.getFirstHeroName().then(string => dashboard.search(string));
+		expect(dashboard.searchResult).not.toBeUndefined();
 		expect(dashboard.searchResult.count()).toBeGreaterThanOrEqual(1);
 	});
 
 	it('should navigate to "Hero details" when hero is selected from search results', () => {
-		dashboard.topHeroes.first().getText().then(string => dashboard.search(string));
-		dashboard.searchResult.first().click();
+		dashboard.getFirstHeroName().then(
+			string => dashboard.search(string)).then(
+				() => dashboard.clickOnFirstSearchResult());
 		expect(browser.getCurrentUrl()).toContain('detail');
 	});
 });

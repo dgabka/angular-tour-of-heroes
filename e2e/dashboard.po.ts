@@ -1,4 +1,5 @@
-import { element, by } from 'protractor';
+import { element, by, browser } from 'protractor';
+import { allure } from './allure-reporter';
 
 export class DashboardPage {
 	header = element(by.tagName('h3'));
@@ -11,8 +12,24 @@ export class DashboardPage {
 		return await this.header.getText();
 	}
 
-	search(pattern: string) {
-		this.searchInput.sendKeys(pattern);
+	search(pattern: string): void {
+		allure.step(`Input "${pattern}" into search input`, () =>
+			this.searchInput.sendKeys(pattern));
 	}
 
+	getFirstHeroName(): Promise<string> {
+		return allure.step('Get first hero\'s name', () =>
+			this.topHeroes.first().getText());
+	}
+
+	clickOnFirstHero(): void {
+		allure.step('Click on first hero', () =>
+			this.topHeroes.first().click());
+	}
+
+	clickOnFirstSearchResult(): void {
+		allure.step('Click on first search result', () => {
+			this.searchResult.first().click();
+		});
+	}
 }

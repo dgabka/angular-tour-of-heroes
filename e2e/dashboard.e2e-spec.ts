@@ -16,14 +16,13 @@ describe('Dashboard', () => {
 		expect(dashboard.topHeroes.count()).toEqual(4);
 	});
 
-	it('should navigate to "Hero details" when hero is clicked', () => {
-		dashboard.topHeroes.first().click();
-		expect(browser.getCurrentUrl()).toContain('detail');
-	});
-
 	it('should display "Hero Search" component', () => {
-		page.navigateTo();
 		expect(dashboard.searchComponent.isPresent()).toBe(true);
 		expect(dashboard.searchInput.isPresent()).toBe(true);
+	});
+
+	it('should navigate to "Hero details" when hero is clicked', () => {
+		dashboard.clickOnFirstHero();
+		expect(browser.getCurrentUrl()).toContain('detail');
 	});
 });
