@@ -6,7 +6,7 @@ import { TestResult } from 'allure2-js-commons';
 jasmine.getEnv().addReporter(new JasmineConsoleReporter());
 
 const reporter = new JasmineAllureReporter(new AllureRuntime({
-	resultsDir: './out/allure-results',
+	resultsDir: './e2e/allure-results',
 	testMapper: (result: TestResult) => {
 		if (result.status === Status.SKIPPED) {
 			result.fullName = `(WAS SKIPPED) ${result.fullName}`;

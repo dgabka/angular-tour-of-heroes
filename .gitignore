@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /out
+**/allure-results
 
 # dependencies
 /node_modules

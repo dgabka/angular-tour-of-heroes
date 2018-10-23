@@ -1,7 +1,7 @@
-import { DefaultPage } from './app.po';
+import { DefaultPage } from '../po/app.po';
 import { browser } from 'protractor';
-import { DashboardPage } from './dashboard.po';
-import { HeroesPage } from './heroes.po';
+import { DashboardPage } from '../po/dashboard.po';
+import { HeroesPage } from '../po/heroes.po';
 
 describe('Tour Of Heroes App', () => {
 	let page: DefaultPage;

@@ -1,5 +1,5 @@
-import { DashboardPage } from './dashboard.po';
-import { DefaultPage } from './app.po';
+import { DashboardPage } from '../po/dashboard.po';
+import { DefaultPage } from '../po/app.po';
 import { browser } from 'protractor';
 
 describe('Dashboard', () => {

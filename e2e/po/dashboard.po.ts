@@ -1,5 +1,5 @@
 import { element, by, browser } from 'protractor';
-import { allure } from './allure-reporter';
+import { allure } from '../allure-reporter';
 
 export class DashboardPage {
 	header = element(by.tagName('h3'));

@@ -1,5 +1,5 @@
 import { browser, element, by } from 'protractor';
-import { allure } from './allure-reporter';
+import { allure } from '../allure-reporter';
 import { DashboardPage } from './dashboard.po';
 import { HeroesPage } from './heroes.po';
 
