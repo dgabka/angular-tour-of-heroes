@@ -7,10 +7,6 @@ export class DashboardPage {
 	searchInput = element(by.id('search-box'));
 	searchResult = element.all(by.css('.search-result'));
 
-	async findHero(name: string) {
-		await this.searchInput.sendKeys(name);
-	}
-
 	async getHeader(): Promise<string> {
 		return await this.header.getText();
 	}
