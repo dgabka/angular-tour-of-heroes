@@ -24,12 +24,25 @@ describe('Heroes view', () => {
 		expect(heroesPage.addHeroButton.isEnabled()).toBe(true);
 	});
 
-	xit('should display "View Details" button after selecting a Hero', async () => {
+	it('should display "View Details" button after selecting a Hero', async () => {
 		const name: string = await heroesPage.getHeroName(0);
 		heroesPage.clickOnHero(0);
 		heroesPage.clickViewDetails();
 		const details: HeroDetails = new HeroDetails();
 		expect(details.getName()).toBe(name);
+	});
+
+	it('should add a new hero', () => {
+		heroesPage.addHeroButton.click();
+		const newHeroDetails: HeroDetails = new HeroDetails();
+		newHeroDetails.inputAndSubmit('Dawid');
+		expect(heroesPage.getLastHeroName()).toEqual('Dawid');
+	});
+
+	it('should delete a hero', async () => {
+		const numberBefore: number = await heroesPage.getHeroesNumber();
+		heroesPage.deleteHero(0);
+		expect(heroesPage.getHeroesNumber()).toEqual(numberBefore - 1);
 	});
 
 });
