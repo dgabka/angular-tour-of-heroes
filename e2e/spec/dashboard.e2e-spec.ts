@@ -1,6 +1,7 @@
 import { DashboardPage } from '../po/dashboard.po';
 import { DefaultPage } from '../po/app.po';
 import { browser } from 'protractor';
+import { HeroDetails } from '../po/hero-details.po';
 
 describe('Dashboard', () => {
 	let dashboard: DashboardPage;
@@ -21,11 +22,15 @@ describe('Dashboard', () => {
 		expect(dashboard.searchInput.isPresent()).toBe(true);
 	});
 
-	it('should navigate to "Hero details" when hero is clicked', () => {
+	it('should navigate to "Hero details" when hero is clicked', async () => {
+		const heroDetails = new HeroDetails();
 		for (let i = 0; i < 4; i++) {
 			page.navigateTo();
+			const name: string  = await dashboard.getHeroName(i);
 			dashboard.clickOnHero(i);
+			expect(heroDetails.getName()).toBe(name);
 			expect(browser.getCurrentUrl()).toContain('detail');
+
 		}
 	});
 });

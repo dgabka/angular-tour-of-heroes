@@ -2,21 +2,20 @@ import { element, by } from 'protractor';
 import { allure } from '../allure-reporter';
 
 export class HeroesPage {
-	header = element(by.tagName('h2'));
+	header = element(by.css('h2'));
 	heroes = element.all(by.css('.heroes li'));
-	heroesNames = element.all(by.css('.hero-element'));
 	addHeroButton = element(by.partialButtonText('Add'));
 	viewDetailsButton = element(by.partialButtonText('View Details'));
 	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
+
+	async getHeader(): Promise<string> {
+		return await this.header.getText();
+	}
 
 	clickOnHero(index: number) {
 		allure.step(`Select hero #${index + 1}`, () =>
 			this.heroes.get(index).click()
 		);
-	}
-
-	async getHeader(): Promise<string> {
-		return await this.header.getText();
 	}
 
 	clickViewDetails() {
@@ -27,13 +26,13 @@ export class HeroesPage {
 
 	getHeroName(index: number): Promise<string> {
 		return allure.step(`Get name of hero #${index + 1}`, () =>
-			this.heroesNames.get(index).getText().then(string => string.replace(/\d+ /, ''))
+			this.heroes.get(index).$('.hero-element').getText().then(string => string.replace(/\d+ /, ''))
 		);
 	}
 
 	getLastHeroName(): Promise<string> {
 		return allure.step('Get last hero name', () =>
-			this.heroesNames.count().then(i => this.getHeroName(i - 1)));
+			this.heroes.count().then(i => this.getHeroName(i - 1)));
 	}
 
 	getHeroesNumber(): Promise<number> {

@@ -2,10 +2,10 @@ import { element, by, browser } from 'protractor';
 import { allure } from '../allure-reporter';
 
 export class DashboardPage {
-	header = element(by.tagName('h3'));
+	header = element(by.css('my-dashboard > h3'));
 	topHeroes = element.all(by.css('.col-1-4'));
-	searchComponent = element(by.id('search-component'));
-	searchInput = element(by.id('search-box'));
+	searchComponent = element(by.css('#search-component'));
+	searchInput = element(by.css('#search-box'));
 	searchResult = element.all(by.css('.search-result'));
 
 	async getHeader(): Promise<string> {
@@ -17,9 +17,9 @@ export class DashboardPage {
 			this.searchInput.sendKeys(pattern));
 	}
 
-	getFirstHeroName(): Promise<string> {
-		return allure.step('Get first hero\'s name', () =>
-			this.topHeroes.first().getText());
+	getHeroName(index: number): Promise<string> {
+		return allure.step(`Get name of hero #${index + 1}`, () =>
+			this.topHeroes.get(index).getText());
 	}
 
 	clickOnHero(index: number) {
