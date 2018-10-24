@@ -26,12 +26,5 @@ describe('Search component', () => {
 		dashboard.clickOnFirstSearchResult();
 		expect(heroDetails.getName()).toBe(name);
 		expect(browser.getCurrentUrl()).toContain('detail');
-
-		/*
-		dashboard.getFirstHeroName().then(
-			string => dashboard.search(string)).then(
-				() => dashboard.clickOnFirstSearchResult());
-		expect(browser.getCurrentUrl()).toContain('detail');
-		*/
 	});
 });
