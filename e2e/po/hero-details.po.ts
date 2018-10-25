@@ -15,11 +15,13 @@ export class HeroDetails {
 		return allure.step('Clear input field', () => this.input.clear());
 	}
 
-	inputAndSubmit(name: string): Promise<void> {
-		allure.step(`Input "${name}" into "name" field`, async () =>
-			await this.input.sendKeys(name));
+	async inputAndSubmit(name: string): Promise<void> {
+		await allure.step(`Input "${name}" into "name" field`, () =>
+			this.input.sendKeys(name));
 		return allure.step('Click "Save" button', () => this.saveButton.click());
 	}
+
+
 
 	goBack(): Promise<void> {
 		return allure.step('Click "Back" button', () =>
