@@ -40,7 +40,7 @@ describe('Hero details view', () => {
 		console.log(name);
 		await dashboard.clickOnHero(1);
 		await browser.wait($('my-hero-detail').isPresent(), 3000);
-		await detailsPage.inputAndSubmit('');
+		await detailsPage.clearInputField();
 		await browser.waitForAngular();
 		console.log('new name -> ' + await dashboard.getHeroName(1));
 		expect(await dashboard.getHeroName(1)).toBe(name);
