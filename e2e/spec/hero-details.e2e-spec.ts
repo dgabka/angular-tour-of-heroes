@@ -13,8 +13,6 @@ describe('Hero details view', () => {
 		page = new DefaultPage();
 		heroesPage = new HeroesPage();
 		detailsPage = new HeroDetails();
-
-		page.navigateTo();
 		heroesPage.navigateTo();
 	});
 

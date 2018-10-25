@@ -9,7 +9,8 @@ export class HeroesPage {
 	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
 
 	navigateTo(): void {
-		browser.get('/heroes');
+		allure.step('Go to heroes', () =>
+			browser.get('/heroes'));
 	}
 
 	async getHeader(): Promise<string> {

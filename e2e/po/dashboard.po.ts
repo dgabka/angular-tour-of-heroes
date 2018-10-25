@@ -8,6 +8,11 @@ export class DashboardPage {
 	searchInput = element(by.css('#search-box'));
 	searchResult = element.all(by.css('.search-result'));
 
+	navigateTo(): void {
+		allure.step('Go to dashboard', () =>
+			browser.get('/dashboard'));
+	}
+
 	async getHeader(): Promise<string> {
 		return await this.header.getText();
 	}
