@@ -8,8 +8,8 @@ export class DashboardPage {
 	searchInput = element(by.css('#search-box'));
 	searchResult = element.all(by.css('.search-result'));
 
-	navigateTo(): void {
-		allure.step('Go to dashboard', () =>
+	navigateTo(): Promise<void> {
+		return allure.step('Go to dashboard', () =>
 			browser.get('/dashboard'));
 	}
 
@@ -17,8 +17,8 @@ export class DashboardPage {
 		return await this.header.getText();
 	}
 
-	search(pattern: string): void {
-		allure.step(`Input "${pattern}" into search input`, () =>
+	search(pattern: string): Promise<void> {
+		return allure.step(`Input "${pattern}" into search input`, () =>
 			this.searchInput.sendKeys(pattern));
 	}
 
@@ -38,8 +38,8 @@ export class DashboardPage {
 			this.topHeroes.first().click());
 	}
 
-	clickOnFirstSearchResult(): void {
-		allure.step('Click on first search result', () => {
+	clickOnFirstSearchResult(): Promise<void> {
+		return allure.step('Click on first search result', () => {
 			this.searchResult.first().click();
 		});
 	}

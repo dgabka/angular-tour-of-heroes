@@ -20,5 +20,6 @@ exports.config = {
       project: 'e2e/tsconfig.e2e.json'
     });
     require('./e2e/allure-reporter').allure;
-  }
+  },
+  SELENIUM_PROMISE_MANAGER: false
 };

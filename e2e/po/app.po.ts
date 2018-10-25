@@ -8,20 +8,20 @@ export class DefaultPage {
 	dashboardNav = element(by.linkText('Dashboard'));
 	heroesNav = element(by.linkText('Heroes'));
 
-	async navigateTo(): Promise<void> {
-		await allure.step('Get homepage', () =>
+	navigateTo(): Promise<void> {
+		return allure.step('Get homepage', () =>
 			browser.get('/'));
 	}
 
 	viewDashboard(): DashboardPage {
-		allure.step('Go to dashboard', () =>
-			this.dashboardNav.click());
+		allure.step('Go to dashboard', async () =>
+			await this.dashboardNav.click());
 		return new DashboardPage();
 	}
 
 	viewHeroes(): HeroesPage {
-		allure.step('Go to heroes list', () =>
-			this.heroesNav.click());
+		allure.step('Go to heroes list', async () =>
+			await this.heroesNav.click());
 		return new HeroesPage();
 	}
 

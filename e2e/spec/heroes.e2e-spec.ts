@@ -4,13 +4,11 @@ import { HeroDetails } from '../po/hero-details.po';
 import { element, by, browser, $ } from 'protractor';
 
 describe('Heroes view', () => {
-	let page: DefaultPage;
 	let heroesPage: HeroesPage;
 
-	beforeEach(() => {
-		page = new DefaultPage();
-		page.navigateTo();
-		heroesPage = page.viewHeroes();
+	beforeEach(async () => {
+		heroesPage = new HeroesPage();
+		await heroesPage.navigateTo();
 	});
 
 	it('should display header', () => {
@@ -27,8 +25,8 @@ describe('Heroes view', () => {
 
 	it('should display "View Details" button after selecting a Hero', async () => {
 		const name: string = await heroesPage.getHeroName(0);
-		heroesPage.clickOnHero(0);
-		heroesPage.clickViewDetails();
+		await heroesPage.clickOnHero(0);
+		await heroesPage.clickViewDetails();
 		const details: HeroDetails = new HeroDetails();
 		expect(details.getName()).toBe(name);
 	});
@@ -50,7 +48,7 @@ describe('Heroes view', () => {
 
 	it('should delete a hero', async () => {
 		const numberBefore: number = await heroesPage.getHeroesNumber();
-		heroesPage.deleteHero(0);
+		await heroesPage.deleteHero(0);
 		expect(heroesPage.getHeroesNumber()).toEqual(numberBefore - 1);
 	});
 

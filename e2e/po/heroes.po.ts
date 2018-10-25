@@ -8,8 +8,8 @@ export class HeroesPage {
 	viewDetailsButton = element(by.partialButtonText('View Details'));
 	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
 
-	navigateTo(): void {
-		allure.step('Go to heroes', () =>
+	navigateTo(): Promise<void> {
+		return allure.step('Go to heroes', () =>
 			browser.get('/heroes'));
 	}
 
@@ -17,20 +17,20 @@ export class HeroesPage {
 		return await this.header.getText();
 	}
 
-	clickOnHero(index: number) {
-		allure.step(`Select hero #${index + 1}`, () =>
+	clickOnHero(index: number): Promise<void> {
+		return allure.step(`Select hero #${index + 1}`, () =>
 			this.heroes.get(index).click()
 		);
 	}
 
-	clickViewDetails() {
-		allure.step(`Click view details`, () =>
+	clickViewDetails(): Promise<void> {
+		return allure.step(`Click view details`, () =>
 			this.viewDetailsButton.click()
 		);
 	}
 
 	clickAddHero() {
-		allure.step('Click "Add New Hero"', () =>
+		return allure.step('Click "Add New Hero"', () =>
 			this.addHeroButton.click());
 	}
 
@@ -50,8 +50,8 @@ export class HeroesPage {
 			this.heroes.count());
 	}
 
-	deleteHero(index: number): void {
-		allure.step(`Delete hero #${index + 1}`, () =>
+	deleteHero(index: number): Promise<void> {
+		return allure.step(`Delete hero #${index + 1}`, () =>
 			this.heroes.get(index).$('.delete-button').click());
 	}
 }

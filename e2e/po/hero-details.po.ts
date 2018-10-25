@@ -7,8 +7,8 @@ export class HeroDetails {
 	saveButton = element(by.partialButtonText('Save'));
 	backButton = element(by.partialButtonText('Back'));
 
-	getName() {
-		return this.header.getText().then(name => name = name.replace(' details!', ''));
+	async getName(): Promise<string> {
+		return await this.header.getText().then(name => name = name.replace(' details!', ''));
 	}
 
 	clearInputField(): void {

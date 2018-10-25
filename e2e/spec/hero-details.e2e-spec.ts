@@ -1,4 +1,3 @@
-import { DefaultPage } from '../po/app.po';
 import { HeroesPage } from '../po/heroes.po';
 import { HeroDetails } from '../po/hero-details.po';
 import { browser } from 'protractor';
@@ -14,7 +13,7 @@ describe('Hero details view', () => {
 		heroesPage.navigateTo();
 	});
 
-	it('should rename a hero', () => {
+	it('should rename a hero', async () => {
 		heroesPage.clickOnHero(0);
 		heroesPage.clickViewDetails();
 		detailsPage.clearInputField();

@@ -7,13 +7,13 @@ describe('Dashboard', () => {
 	let dashboard: DashboardPage;
 	let page: DefaultPage;
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		page = new DefaultPage();
 		dashboard = new DashboardPage();
-		page.navigateTo();
+		await page.navigateTo();
 	});
 
-	it('should display four heroes', () => {
+	it('should display four heroes', async () => {
 		expect(dashboard.topHeroes.count()).toEqual(4);
 	});
 
@@ -25,7 +25,7 @@ describe('Dashboard', () => {
 	it('should navigate to "Hero details" when hero is clicked', async () => {
 		const heroDetails = new HeroDetails();
 		const name: string  = await dashboard.getHeroName(1);
-		dashboard.clickOnHero(1);
+		await dashboard.clickOnHero(1);
 		expect(heroDetails.getName()).toBe(name);
 		expect(browser.getCurrentUrl()).toContain('detail');
 	});
