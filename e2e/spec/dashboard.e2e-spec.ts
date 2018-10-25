@@ -27,7 +27,7 @@ describe('Dashboard', () => {
 		const heroDetails = new HeroDetails();
 		const name: string  = await dashboard.getHeroName(1);
 		await dashboard.clickOnHero(1);
-		await browser.wait($('my-hero-detai').isPresent(), 1000);
+		await browser.wait($('my-hero-detail').isPresent(), 1000);
 		expect(await heroDetails.getName()).toBe(name);
 		expect(await browser.getCurrentUrl()).toContain('detail');
 	});
