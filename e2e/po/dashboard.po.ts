@@ -28,14 +28,9 @@ export class DashboardPage {
 	}
 
 	clickOnHero(index: number): Promise<void> {
-		return allure.step(`Click on hero number ${index + 1}`, () => {
+		return allure.step(`Click on hero #${index + 1}`, () => {
 			this.topHeroes.get(index).click();
 		});
-	}
-
-	clickOnFirstHero(): Promise<void> {
-		return allure.step('Click on first hero', () =>
-			this.topHeroes.first().click());
 	}
 
 	clickOnFirstSearchResult(): Promise<void> {
