@@ -9,7 +9,7 @@ describe('Hero details view', () => {
 	let dashboard: DashboardPage;
 	let detailsPage: HeroDetails;
 
-	beforeAll(async () => {
+	beforeAll(() => {
 		heroesPage = new HeroesPage();
 		dashboard = new DashboardPage();
 		detailsPage = new HeroDetails();
@@ -32,5 +32,17 @@ describe('Hero details view', () => {
 		await detailsPage.inputAndSubmit('Dawid');
 		await browser.waitForAngular();
 		expect(await heroesPage.getHeroName(0)).toBe('Dawid');
+	});
+
+	it('should not rename hero to an empty string', async () => {
+		await dashboard.navigateTo();
+		const name: string = await dashboard.getHeroName(1);
+		console.log(name);
+		await dashboard.clickOnHero(1);
+		await browser.wait($('my-hero-detail').isPresent(), 3000);
+		await detailsPage.inputAndSubmit('');
+		await browser.waitForAngular();
+		console.log('new name -> ' + await dashboard.getHeroName(1));
+		expect(await dashboard.getHeroName(1)).toBe(name);
 	});
 });
