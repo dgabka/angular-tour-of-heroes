@@ -16,4 +16,9 @@ export class HeroDetails {
 			this.input.sendKeys(name));
 		allure.step('Save', () => this.saveButton.click());
 	}
+
+	goBack(): void {
+		allure.step('Click "Back" button', () =>
+			this.backButton.click());
+	}
 }

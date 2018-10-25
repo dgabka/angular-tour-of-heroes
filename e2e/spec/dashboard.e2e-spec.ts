@@ -24,13 +24,9 @@ describe('Dashboard', () => {
 
 	it('should navigate to "Hero details" when hero is clicked', async () => {
 		const heroDetails = new HeroDetails();
-		for (let i = 0; i < 4; i++) {
-			page.navigateTo();
-			const name: string  = await dashboard.getHeroName(i);
-			dashboard.clickOnHero(i);
-			expect(heroDetails.getName()).toBe(name);
-			expect(browser.getCurrentUrl()).toContain('detail');
-
-		}
+		const name: string  = await dashboard.getHeroName(1);
+		dashboard.clickOnHero(1);
+		expect(heroDetails.getName()).toBe(name);
+		expect(browser.getCurrentUrl()).toContain('detail');
 	});
 });

@@ -1,6 +1,7 @@
 import { DefaultPage } from '../po/app.po';
 import { HeroesPage } from '../po/heroes.po';
 import { HeroDetails } from '../po/hero-details.po';
+import { element, by, browser, $ } from 'protractor';
 
 describe('Heroes view', () => {
 	let page: DefaultPage;
@@ -33,10 +34,18 @@ describe('Heroes view', () => {
 	});
 
 	it('should add a new hero', () => {
-		heroesPage.addHeroButton.click();
+		heroesPage.clickAddHero();
 		const newHeroDetails: HeroDetails = new HeroDetails();
 		newHeroDetails.inputAndSubmit('Dawid');
 		expect(heroesPage.getLastHeroName()).toEqual('Dawid');
+	});
+
+	it('should close "Add hero" component when back is clicked', () => {
+		heroesPage.clickAddHero();
+		const newHeroDetails: HeroDetails = new HeroDetails();
+		expect(browser.isElementPresent($('my-hero-detail'))).toBe(true);
+		newHeroDetails.goBack();
+		expect(browser.isElementPresent($('my-hero-detail'))).toBe(false);
 	});
 
 	it('should delete a hero', async () => {

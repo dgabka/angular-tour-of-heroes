@@ -24,6 +24,11 @@ export class HeroesPage {
 		);
 	}
 
+	clickAddHero() {
+		allure.step('Click add hero', () =>
+			this.addHeroButton.click());
+	}
+
 	getHeroName(index: number): Promise<string> {
 		return allure.step(`Get name of hero #${index + 1}`, () =>
 			this.heroes.get(index).$('.hero-element').getText().then(string => string.replace(/\d+ /, ''))
