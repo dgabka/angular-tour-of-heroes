@@ -1,4 +1,4 @@
-import { element, by } from 'protractor';
+import { element, by, browser } from 'protractor';
 import { allure } from '../allure-reporter';
 
 export class HeroesPage {
@@ -7,6 +7,10 @@ export class HeroesPage {
 	addHeroButton = element(by.partialButtonText('Add'));
 	viewDetailsButton = element(by.partialButtonText('View Details'));
 	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
+
+	navigateTo(): void {
+		browser.get('/heroes');
+	}
 
 	async getHeader(): Promise<string> {
 		return await this.header.getText();
@@ -25,7 +29,7 @@ export class HeroesPage {
 	}
 
 	clickAddHero() {
-		allure.step('Click add hero', () =>
+		allure.step('Click "Add New Hero"', () =>
 			this.addHeroButton.click());
 	}
 

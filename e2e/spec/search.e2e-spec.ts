@@ -1,6 +1,6 @@
 import { DashboardPage } from '../po/dashboard.po';
 import { DefaultPage } from '../po/app.po';
-import { browser } from 'protractor';
+import { browser, $ } from 'protractor';
 import { HeroDetails } from '../po/hero-details.po';
 
 describe('Search component', () => {
@@ -15,7 +15,7 @@ describe('Search component', () => {
 
 	it('should display search results when provided with input', () => {
 		dashboard.getHeroName(0).then(string => dashboard.search(string));
-		expect(dashboard.searchResult).not.toBeUndefined();
+		expect(browser.isElementPresent($('.search-result'))).toBe(true);
 		expect(dashboard.searchResult.count()).toBeGreaterThanOrEqual(1);
 	});
 
@@ -24,7 +24,7 @@ describe('Search component', () => {
 		const name: string  = await dashboard.getHeroName(0);
 		dashboard.search(name);
 		dashboard.clickOnFirstSearchResult();
-		expect(heroDetails.getName()).toBe(name);
 		expect(browser.getCurrentUrl()).toContain('detail');
+		expect(heroDetails.getName()).toBe(name);
 	});
 });
