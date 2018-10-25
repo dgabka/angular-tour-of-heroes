@@ -7,18 +7,18 @@ describe('Hero details view', () => {
 	let heroesPage: HeroesPage;
 	let detailsPage: HeroDetails;
 
-	beforeAll(() => {
+	beforeEach(async () => {
 		heroesPage = new HeroesPage();
 		detailsPage = new HeroDetails();
-		heroesPage.navigateTo();
+		await heroesPage.navigateTo();
 	});
 
 	it('should rename a hero', async () => {
-		heroesPage.clickOnHero(0);
-		heroesPage.clickViewDetails();
-		detailsPage.clearInputField();
-		detailsPage.inputAndSubmit('Dawid');
-		browser.waitForAngular();
-		expect(heroesPage.getHeroName(0)).toBe('Dawid');
+		await heroesPage.clickOnHero(0);
+		await heroesPage.clickViewDetails();
+		await detailsPage.clearInputField();
+		await detailsPage.inputAndSubmit('Dawid');
+		await browser.waitForAngular();
+		expect(await heroesPage.getHeroName(0)).toBe('Dawid');
 	});
 });

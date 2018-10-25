@@ -29,7 +29,7 @@ export class HeroesPage {
 		);
 	}
 
-	clickAddHero() {
+	clickAddHero(): Promise<void> {
 		return allure.step('Click "Add New Hero"', () =>
 			this.addHeroButton.click());
 	}

@@ -13,19 +13,17 @@ export class DefaultPage {
 			browser.get('/'));
 	}
 
-	viewDashboard(): DashboardPage {
-		allure.step('Go to dashboard', async () =>
+	viewDashboard(): Promise<void> {
+		return allure.step('Go to dashboard', async () =>
 			await this.dashboardNav.click());
-		return new DashboardPage();
 	}
 
-	viewHeroes(): HeroesPage {
-		allure.step('Go to heroes list', async () =>
+	viewHeroes(): Promise<void> {
+		return allure.step('Go to heroes list', async () =>
 			await this.heroesNav.click());
-		return new HeroesPage();
 	}
 
-	getHeaderText() {
-		return this.header.getText();
+	async getHeaderText(): Promise<string> {
+		return await this.header.getText();
 	}
 }

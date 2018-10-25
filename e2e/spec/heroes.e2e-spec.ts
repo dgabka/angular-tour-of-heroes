@@ -11,16 +11,16 @@ describe('Heroes view', () => {
 		await heroesPage.navigateTo();
 	});
 
-	it('should display header', () => {
-		expect(heroesPage.getHeader()).toBe('My Heroes');
+	it('should display header', async () => {
+		expect(await heroesPage.getHeader()).toBe('My Heroes');
 	});
 
-	it('should display list of heroes', () => {
-		expect(heroesPage.heroes.count()).toBeGreaterThanOrEqual(1);
+	it('should display list of heroes', async () => {
+		expect(await heroesPage.heroes.count()).toBeGreaterThanOrEqual(1);
 	});
 
-	it('should display "Add New Hero" button', () => {
-		expect(heroesPage.addHeroButton.isEnabled()).toBe(true);
+	it('should display "Add New Hero" button', async () => {
+		expect(await heroesPage.addHeroButton.isEnabled()).toBe(true);
 	});
 
 	it('should display "View Details" button after selecting a Hero', async () => {
@@ -28,21 +28,21 @@ describe('Heroes view', () => {
 		await heroesPage.clickOnHero(0);
 		await heroesPage.clickViewDetails();
 		const details: HeroDetails = new HeroDetails();
-		expect(details.getName()).toBe(name);
+		expect(await details.getName()).toBe(name);
 	});
 
-	it('should add a new hero', () => {
-		heroesPage.clickAddHero();
+	it('should add a new hero', async () => {
+		await heroesPage.clickAddHero();
 		const newHeroDetails: HeroDetails = new HeroDetails();
-		newHeroDetails.inputAndSubmit('Dawid');
-		expect(heroesPage.getLastHeroName()).toEqual('Dawid');
+		await newHeroDetails.inputAndSubmit('Dawid');
+		expect(await heroesPage.getLastHeroName()).toEqual('Dawid');
 	});
 
-	it('should close "Add hero" component when back is clicked', () => {
-		heroesPage.clickAddHero();
+	it('should close "Add hero" component when back is clicked', async () => {
+		await heroesPage.clickAddHero();
 		const newHeroDetails: HeroDetails = new HeroDetails();
 		expect(browser.isElementPresent($('my-hero-detail'))).toBe(true);
-		newHeroDetails.goBack();
+		await newHeroDetails.goBack();
 		expect(browser.isElementPresent($('my-hero-detail'))).toBe(false);
 	});
 

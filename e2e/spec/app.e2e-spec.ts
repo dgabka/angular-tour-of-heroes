@@ -6,34 +6,34 @@ import { HeroesPage } from '../po/heroes.po';
 describe('Tour Of Heroes App', () => {
 	let page: DefaultPage;
 
-	beforeAll(() => {
+	beforeAll(async () => {
 		page = new DefaultPage();
-		page.navigateTo();
+		await page.navigateTo();
 	});
 
-	it('should display header', () => {
-		expect(page.getHeaderText()).toEqual('Tour of Heroes');
+	it('should display header', async () => {
+		expect(await page.getHeaderText()).toEqual('Tour of Heroes');
 	});
 
-	it('should display active navigation buttons', () => {
-		expect(page.heroesNav.isEnabled()).toBe(true);
-		expect(page.dashboardNav.isEnabled()).toBe(true);
+	it('should display active navigation buttons', async () => {
+		expect(await page.heroesNav.isEnabled()).toBe(true);
+		expect(await page.dashboardNav.isEnabled()).toBe(true);
 	});
 
-	it('should display Dashboard by default', () => {
-		expect(browser.getCurrentUrl()).toContain('dashboard');
+	it('should display Dashboard by default', async () => {
+		expect(await browser.getCurrentUrl()).toContain('dashboard');
 		const dashboard: DashboardPage = new DashboardPage();
-		expect(dashboard.getHeader()).toBe('Top Heroes');
+		expect(await dashboard.getHeader()).toBe('Top Heroes');
 	});
 
-	it('should navigate between Dashboard and Heroes views', () => {
-		let heroes: HeroesPage;
-		let dashboard: DashboardPage;
+	it('should navigate between Dashboard and Heroes views', async () => {
+		const heroes: HeroesPage = new HeroesPage();
+		const dashboard: DashboardPage = new DashboardPage();
 
-		heroes = page.viewHeroes();
-		expect(heroes.getHeader()).toBe('My Heroes');
-		dashboard = page.viewDashboard();
-		expect(dashboard.getHeader()).toBe('Top Heroes');
+		await page.viewHeroes();
+		expect(await heroes.getHeader()).toBe('My Heroes');
+		await page.viewDashboard();
+		expect(await dashboard.getHeader()).toBe('Top Heroes');
 
 	});
 });

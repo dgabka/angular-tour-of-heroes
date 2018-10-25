@@ -16,8 +16,8 @@ describe('Search component', () => {
 	it('should display search results when provided with input', async () => {
 		const name: string = await dashboard.getHeroName(0);
 		await dashboard.search(name);
-		expect(browser.isElementPresent($('.search-result'))).toBe(true);
-		expect(dashboard.searchResult.count()).toBeGreaterThanOrEqual(1);
+		expect(await browser.isElementPresent($('.search-result'))).toBe(true);
+		expect(await dashboard.searchResult.count()).toBeGreaterThanOrEqual(1);
 	});
 
 	it('should navigate to "Hero details" when hero is selected from search results', async () => {
@@ -25,7 +25,8 @@ describe('Search component', () => {
 		const name: string  = await dashboard.getHeroName(0);
 		await dashboard.search(name);
 		await dashboard.clickOnFirstSearchResult();
-		expect(browser.getCurrentUrl()).toContain('detail');
-		expect(heroDetails.getName()).toBe(name);
+		await browser.waitForAngular();
+		expect(await browser.getCurrentUrl()).toContain('detail');
+		expect(await heroDetails.getName()).toBe(name);
 	});
 });
