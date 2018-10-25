@@ -1,38 +1,23 @@
 # Getting Started
 
-Super simple Angular app with 1 module and 2 routes. This is a minor variation on the Tour of Heroes I wrote for the [official docs](https://angular.io/tutorial).
+Fork of [Tour Of Heroes](https://github.com/johnpapa/angular-tour-of-heroes) introducing end-to-end tests using Protractor, Jasmine and Allure.
 
 ## Get the Code
 ```
-git clone https://github.com/johnpapa/angular-tour-of-heroes.git toh
-cd toh
+git clone https://github.com/dgabka/angular-tour-of-heroes.git
+cd angular-tour-of-heroes
 npm i
 ```
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+By default test are run on port 4200 in Google Chrome.
 
-## Further help
+## Allure Report
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+By default Allure report is genarated under `e2e/allure-results`.
+To open the report first you need to have Allure [installed](https://docs.qameta.io/allure/#_get_started).
+Then run `allure serve e2e/allure-results` from within project root directory.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
