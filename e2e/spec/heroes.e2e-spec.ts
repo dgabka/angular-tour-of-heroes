@@ -1,13 +1,17 @@
-import { DefaultPage } from '../po/app.po';
 import { HeroesPage } from '../po/heroes.po';
 import { HeroDetails } from '../po/hero-details.po';
-import { element, by, browser, $ } from 'protractor';
+import { browser, $ } from 'protractor';
 
 describe('Heroes view', () => {
 	let heroesPage: HeroesPage;
+	let details: HeroDetails;
+
+	beforeAll(() => {
+		heroesPage = new HeroesPage();
+		details = new HeroDetails();
+	});
 
 	beforeEach(async () => {
-		heroesPage = new HeroesPage();
 		await heroesPage.navigateTo();
 	});
 
@@ -27,22 +31,19 @@ describe('Heroes view', () => {
 		const name: string = await heroesPage.getHeroName(0);
 		await heroesPage.clickOnHero(0);
 		await heroesPage.clickViewDetails();
-		const details: HeroDetails = new HeroDetails();
 		expect(await details.getName()).toBe(name);
 	});
 
 	it('should add a new hero', async () => {
 		await heroesPage.clickAddHero();
-		const newHeroDetails: HeroDetails = new HeroDetails();
-		await newHeroDetails.inputAndSubmit('Dawid');
+		await details.inputAndSubmit('Dawid');
 		expect(await heroesPage.getLastHeroName()).toEqual('Dawid');
 	});
 
 	it('should close "Add hero" component when back is clicked', async () => {
 		await heroesPage.clickAddHero();
-		const newHeroDetails: HeroDetails = new HeroDetails();
 		expect(browser.isElementPresent($('my-hero-detail'))).toBe(true);
-		await newHeroDetails.goBack();
+		await details.goBack();
 		expect(browser.isElementPresent($('my-hero-detail'))).toBe(false);
 	});
 

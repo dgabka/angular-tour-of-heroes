@@ -1,10 +1,8 @@
 import { browser, element, by } from 'protractor';
 import { allure } from '../allure-reporter';
-import { DashboardPage } from './dashboard.po';
-import { HeroesPage } from './heroes.po';
 
 export class DefaultPage {
-	header = element(by.tagName('h1'));
+	header = element(by.css('h1'));
 	dashboardNav = element(by.linkText('Dashboard'));
 	heroesNav = element(by.linkText('Heroes'));
 

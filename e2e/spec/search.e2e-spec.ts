@@ -7,9 +7,12 @@ describe('Search component', () => {
 	let dashboard: DashboardPage;
 	let page: DefaultPage;
 
-	beforeEach(async () => {
+	beforeAll(() => {
 		page = new DefaultPage;
 		dashboard = new DashboardPage;
+	});
+
+	beforeEach(async () => {
 		await page.navigateTo();
 	});
 

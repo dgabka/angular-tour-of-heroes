@@ -21,8 +21,6 @@ export class HeroDetails {
 		return allure.step('Click "Save" button', () => this.saveButton.click());
 	}
 
-
-
 	goBack(): Promise<void> {
 		return allure.step('Click "Back" button', () =>
 			this.backButton.click());
