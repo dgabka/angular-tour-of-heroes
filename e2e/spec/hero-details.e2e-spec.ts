@@ -5,12 +5,10 @@ import { browser } from 'protractor';
 
 
 describe('Hero details view', () => {
-	let page: DefaultPage;
 	let heroesPage: HeroesPage;
 	let detailsPage: HeroDetails;
 
 	beforeAll(() => {
-		page = new DefaultPage();
 		heroesPage = new HeroesPage();
 		detailsPage = new HeroDetails();
 		heroesPage.navigateTo();
