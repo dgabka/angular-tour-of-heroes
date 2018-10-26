@@ -45,4 +45,16 @@ describe('Hero details view', () => {
 		await browser.wait($('my-dashboard').isPresent(), 3000);
 		expect(await dashboard.getHeroName(1)).toBe(name);
 	});
+
+	it('should not rename hero to an existing name of another hero', async () => {
+		await dashboard.navigateTo();
+		const newName: string = await dashboard.getHeroName(1);
+		const oldName: string = await dashboard.getHeroName(2);
+		await dashboard.clickOnHero(2);
+		await browser.wait($('my-hero-detail').isPresent(), 3000);
+		await detailsPage.clearInputField();
+		await detailsPage.inputAndSubmit(newName);
+		await browser.wait($('my-dashboard').isPresent(), 3000);
+		expect(await dashboard.getHeroName(2)).toBe(oldName);
+	});
 });

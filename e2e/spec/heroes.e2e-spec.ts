@@ -47,6 +47,14 @@ describe('Heroes view', () => {
 		expect(await heroesPage.getHeroesNumber()).toEqual(numberOfHeroes);
 	});
 
+	it('should not add hero with existing name', async () => {
+		const numberOfHeroes: number = await heroesPage.getHeroesNumber();
+		const name: string  = await heroesPage.getHeroName(3);
+		await heroesPage.clickAddHero();
+		await details.inputAndSubmit(name);
+		expect(await heroesPage.getHeroesNumber()).toEqual(numberOfHeroes);
+	});
+
 	it('should close "Add hero" component when back is clicked', async () => {
 		await heroesPage.clickAddHero();
 		expect(browser.isElementPresent($('my-hero-detail'))).toBe(true);
