@@ -22,12 +22,11 @@ export class HeroDetails {
 		return this.submit();
 	}
 
-	async clearWithBackspace(length: number): Promise<void> {
+	clearWithBackspace(length: number): Promise<void> {
 		return allure.step(`Clear input field with backspace`, async () => {
 			for (let i = 0; i < length; i++) {
 				await this.input.sendKeys(protractor.Key.BACK_SPACE);
 			}
-			return await this.input.sendKeys('');
 		});
 	}
 
