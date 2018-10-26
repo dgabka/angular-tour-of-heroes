@@ -2,7 +2,6 @@ import { HeroesPage } from '../po/heroes.po';
 import { HeroDetails } from '../po/hero-details.po';
 import { browser, $ } from 'protractor';
 import { DashboardPage } from '../po/dashboard.po';
-import { getHashes } from 'crypto';
 
 
 describe('Hero details view', () => {
@@ -43,7 +42,7 @@ describe('Hero details view', () => {
 		await detailsPage.clearWithBackspace(name.length);
 		await detailsPage.submit();
 		await browser.wait($('my-dashboard').isPresent(), 3000);
-		expect(await dashboard.getHeroName(1)).toBe(name);
+		expect(await dashboard.getHeroName(1)).toBe(name, 'Invalid name: Hero has been renamed to an empty string');
 	});
 
 	it('should not rename hero to an existing name of another hero', async () => {
@@ -55,6 +54,6 @@ describe('Hero details view', () => {
 		await detailsPage.clearInputField();
 		await detailsPage.inputAndSubmit(newName);
 		await browser.wait($('my-dashboard').isPresent(), 3000);
-		expect(await dashboard.getHeroName(2)).toBe(oldName);
+		expect(await dashboard.getHeroName(2)).toBe(oldName, 'Invalid name: Hero has been renamed to a duplicated name');
 	});
 });

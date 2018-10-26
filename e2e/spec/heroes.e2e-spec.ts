@@ -44,7 +44,7 @@ describe('Heroes view', () => {
 		const numberOfHeroes: number = await heroesPage.getHeroesNumber();
 		await heroesPage.clickAddHero();
 		await details.inputAndSubmit('');
-		expect(await heroesPage.getHeroesNumber()).toEqual(numberOfHeroes);
+		expect(await heroesPage.getHeroesNumber()).toBe(numberOfHeroes, 'Invalid name: Hero has been created with empty name');
 	});
 
 	it('should not add hero with existing name', async () => {
@@ -52,7 +52,7 @@ describe('Heroes view', () => {
 		const name: string  = await heroesPage.getHeroName(3);
 		await heroesPage.clickAddHero();
 		await details.inputAndSubmit(name);
-		expect(await heroesPage.getHeroesNumber()).toEqual(numberOfHeroes);
+		expect(await heroesPage.getHeroesNumber()).toBe(numberOfHeroes, 'Invalid name: Hero has been created with a duplicated name');
 	});
 
 	it('should close "Add hero" component when back is clicked', async () => {

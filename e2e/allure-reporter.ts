@@ -24,14 +24,14 @@ giw.writeEnvironmentInfo({
 	'OS': 'macOS High Sierra 10.13.6'
 });
 
-/*
+
 giw.writeCategories([
 	{
-		'name': 'Operation fails',
-		'messageRegex': /^Expected .* to (equal|be close to) (-?(\d+(\.\d+)?)|'NaN')\..* /gm,
+		'name': 'Invalid name',
+		'messageRegex': /.*Invalid name.*/gm,
 		matchedStatuses: [
 			Status.FAILED
 		]
 	}
 ]);
-*/
+
