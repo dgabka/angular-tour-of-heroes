@@ -9,7 +9,7 @@ export class HeroDetails {
 	backButton = element(by.partialButtonText('Back'));
 
 	async getName(): Promise<string> {
-		return await this.header.getText().then(name => name = name.replace(' details!', ''));
+		return await this.header.getText().then(name => name.replace(' details!', ''));
 	}
 
 	clearInputField(): Promise<void> {

@@ -35,8 +35,10 @@ describe('Heroes view', () => {
 	});
 
 	it('should add a new hero', async () => {
+		const numberOfHeroes: number = await heroesPage.heroes.count();
 		await heroesPage.clickAddHero();
 		await details.inputAndSubmit('Dawid');
+		expect(await heroesPage.heroes.count()).toEqual(numberOfHeroes + 1);
 		expect(await heroesPage.getLastHeroName()).toEqual('Dawid');
 	});
 
