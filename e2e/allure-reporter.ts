@@ -29,7 +29,7 @@ giw.writeCategories([
 	{
 		'name': 'Invalid name',
 		'messageRegex': /.*Invalid name.*/gm,
-		matchedStatuses: [
+		'matchedStatuses': [
 			Status.FAILED
 		]
 	}
