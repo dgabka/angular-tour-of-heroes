@@ -67,7 +67,7 @@ describe('Heroes view', () => {
 	it('should delete a hero', async () => {
 		const numberBefore: number = await heroesPage.getHeroesNumber();
 		await heroesPage.deleteHero(0);
-		expect(heroesPage.getHeroesNumber()).toEqual(numberBefore - 1);
+		expect(await heroesPage.getHeroesNumber()).toEqual(numberBefore - 1);
 	});
 
 });
