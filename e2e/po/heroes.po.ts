@@ -1,9 +1,11 @@
-import { element, by, browser } from 'protractor';
+import { element, by, browser, $$ } from 'protractor';
 import { allure } from '../allure-reporter';
+import { log } from 'util';
 
 export class HeroesPage {
 	header = element(by.css('h2'));
 	heroes = element.all(by.css('.heroes li'));
+	ids = $$('.badge');
 	addHeroButton = element(by.partialButtonText('Add'));
 	viewDetailsButton = element(by.partialButtonText('View Details'));
 	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
@@ -14,7 +16,7 @@ export class HeroesPage {
 	}
 
 	async getHeader(): Promise<string> {
-		return await this.header.getText();
+		return this.header.getText();
 	}
 
 	clickOnHero(index: number): Promise<void> {
@@ -53,5 +55,11 @@ export class HeroesPage {
 	deleteHero(index: number): Promise<void> {
 		return allure.step(`Delete hero #${index + 1}`, () =>
 			this.heroes.get(index).$('.delete-button').click());
+	}
+
+	async xxx() {
+		const x = [];
+		await this.heroes.each(e => x.push(e.$('.badge').getText()));
+		return Promise.all(x);
 	}
 }

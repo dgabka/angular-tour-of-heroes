@@ -1,6 +1,7 @@
 import { HeroesPage } from '../po/heroes.po';
 import { HeroDetails } from '../po/hero-details.po';
 import { browser, $ } from 'protractor';
+import { isSorted } from '../helpers';
 
 describe('Heroes view', () => {
 	let heroesPage: HeroesPage;
@@ -70,4 +71,7 @@ describe('Heroes view', () => {
 		expect(await heroesPage.getHeroesNumber()).toEqual(numberBefore - 1);
 	});
 
+	it('should display heroes in an ascending order', async () => {
+		expect(isSorted(await heroesPage.xxx())).toBe(true);
+	});
 });
