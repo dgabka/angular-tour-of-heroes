@@ -20,10 +20,8 @@ describe('Hero details view', () => {
 	it('should navigate back', async () => {
 		await dashboard.navigateTo();
 		await dashboard.clickOnHero(1);
-		await browser.wait($('my-hero-detail').isPresent(), 1000);
 		await detailsPage.goBack();
-		await browser.waitForAngular();
-		expect(await browser.getCurrentUrl()).toContain('dashboard');
+		expect(await dashboard.getHeader()).toBeTruthy();
 	});
 
 	it('should rename a hero', async () => {
@@ -32,7 +30,6 @@ describe('Hero details view', () => {
 		await heroesPage.clickViewDetails();
 		await detailsPage.clearInputField();
 		await detailsPage.inputAndSubmit('Dawid');
-		await browser.waitForAngular();
 		expect(await heroesPage.getHeroName(0)).toBe('Dawid');
 	});
 
@@ -40,10 +37,8 @@ describe('Hero details view', () => {
 		await dashboard.navigateTo();
 		const name: string = await dashboard.getHeroName(1);
 		await dashboard.clickOnHero(1);
-		await browser.wait($('my-hero-detail').isPresent(), 3000);
 		await detailsPage.clearWithBackspace(name.length);
 		await detailsPage.submit();
-		await browser.wait($('my-dashboard').isPresent(), 3000);
 		expect(await dashboard.getHeroName(1)).toBe(name, 'Invalid name: Hero has been renamed to an empty string');
 	});
 
@@ -52,10 +47,8 @@ describe('Hero details view', () => {
 		const newName: string = await dashboard.getHeroName(1);
 		const oldName: string = await dashboard.getHeroName(2);
 		await dashboard.clickOnHero(2);
-		await browser.wait($('my-hero-detail').isPresent(), 3000);
 		await detailsPage.clearInputField();
 		await detailsPage.inputAndSubmit(newName);
-		await browser.wait($('my-dashboard').isPresent(), 3000);
 		expect(await dashboard.getHeroName(2)).toBe(oldName, 'Invalid name: Hero has been renamed to a duplicated name');
 	});
 
@@ -65,7 +58,6 @@ describe('Hero details view', () => {
 		await heroesPage.clickViewDetails();
 		await detailsPage.clearInputField();
 		await detailsPage.inputAndSubmit('x'.repeat(256));
-		await browser.waitForAngular();
 		expect(await heroesPage.getHeroName(1).then(x => x.length)).not.toBe(256, 'Invalid name: Too long name breaks the layout');
 		await browser.takeScreenshot().then(png => allure.attachment('screenshot', Buffer.from(png, 'base64'), ContentType.PNG));
 	});

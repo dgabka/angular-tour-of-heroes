@@ -1,11 +1,10 @@
 import { element, by, browser, $$ } from 'protractor';
 import { allure } from '../allure-reporter';
-import { log } from 'util';
+import { getWhenVisible } from '../helpers';
 
 export class HeroesPage {
 	header = element(by.css('h2'));
 	heroes = element.all(by.css('.heroes li'));
-	ids = $$('.badge');
 	addHeroButton = element(by.partialButtonText('Add'));
 	viewDetailsButton = element(by.partialButtonText('View Details'));
 	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
@@ -37,8 +36,8 @@ export class HeroesPage {
 	}
 
 	getHeroName(index: number): Promise<string> {
-		return allure.step(`Get name of hero #${index + 1}`, () =>
-			this.heroes.get(index).$('.hero-element').getText().then(string => string.replace(/\d+ /, ''))
+		return allure.step(`Get name of hero #${index + 1}`, async () =>
+			(await getWhenVisible(this.heroes.get(index))).$('.hero-element').getText().then(string => string.replace(/\d+ /, ''))
 		);
 	}
 

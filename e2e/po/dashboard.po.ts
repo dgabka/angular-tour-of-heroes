@@ -1,5 +1,6 @@
 import { element, by, browser } from 'protractor';
 import { allure } from '../allure-reporter';
+import { clickWhenClickable, getWhenVisible } from '../helpers';
 
 export class DashboardPage {
 	header = element(by.css('my-dashboard > h3'));
@@ -14,7 +15,7 @@ export class DashboardPage {
 	}
 
 	async getHeader(): Promise<string> {
-		return await this.header.getText();
+		return (await getWhenVisible(this.header)).getText();
 	}
 
 	search(pattern: string): Promise<void> {
@@ -23,13 +24,13 @@ export class DashboardPage {
 	}
 
 	getHeroName(index: number): Promise<string> {
-		return allure.step(`Get name of hero #${index + 1}`, () =>
-			this.topHeroes.get(index).getText());
+		return allure.step(`Get name of hero #${index + 1}`, async () =>
+			(await getWhenVisible(this.topHeroes.get(index))).getText());
 	}
 
 	clickOnHero(index: number): Promise<void> {
-		return allure.step(`Click on hero #${index + 1}`, () => {
-			this.topHeroes.get(index).click();
+		return allure.step(`Click on hero #${index + 1}`, async () => {
+			await clickWhenClickable(this.topHeroes.get(index));
 		});
 	}
 
