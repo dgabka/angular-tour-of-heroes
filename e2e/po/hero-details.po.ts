@@ -1,6 +1,6 @@
-import { element, by } from 'protractor';
+import { element, by, browser } from 'protractor';
 import { allure } from '../allure-reporter';
-import { protractor } from 'protractor/built/ptor';
+import { protractor, $ } from 'protractor/';
 import { clickWhenClickable, getWhenVisible } from '../helpers';
 
 export class HeroDetails {
@@ -9,8 +9,12 @@ export class HeroDetails {
 	saveButton = element(by.partialButtonText('Save'));
 	backButton = element(by.partialButtonText('Back'));
 
-	async getName(): Promise<string> {
-		return await this.header.getText().then(name => name.replace(' details!', ''));
+	async getName(): Promise<string | boolean> {
+		return (await getWhenVisible(this.header)).getText().then(name => name.replace(' details!', ''));
+	}
+
+	async isVisible(): Promise<boolean> {
+		return browser.isElementPresent($('my-hero-detail'));
 	}
 
 	clearInputField(): Promise<void> {

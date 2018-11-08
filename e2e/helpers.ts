@@ -9,12 +9,12 @@ export function isSorted(list: Array<string> | Array<number>): boolean {
 	return true;
 }
 
-export async function getWhenVisible(element: ElementFinder, timeout: number = 3000): Promise<ElementFinder> {
+export async function getWhenVisible(element: ElementFinder, timeout: number = 2000): Promise<ElementFinder> {
 	await browser.wait(ExpectedConditions.visibilityOf(element), timeout);
 	return element;
 }
 
-export async function clickWhenClickable(element: ElementFinder, timeout: number = 3000) {
+export async function clickWhenClickable(element: ElementFinder, timeout: number = 2000): Promise<void> {
 	await browser.wait(ExpectedConditions.elementToBeClickable(element), timeout);
 	element.click();
 }

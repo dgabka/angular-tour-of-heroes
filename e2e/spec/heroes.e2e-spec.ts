@@ -1,6 +1,5 @@
 import { HeroesPage } from '../po/heroes.po';
 import { HeroDetails } from '../po/hero-details.po';
-import { browser, $ } from 'protractor';
 import { isSorted } from '../helpers';
 
 describe('Heroes view', () => {
@@ -60,9 +59,9 @@ describe('Heroes view', () => {
 
 	it('should close "Add hero" component when back is clicked', async () => {
 		await heroesPage.clickAddHero();
-		expect(browser.isElementPresent($('my-hero-detail'))).toBe(true);
+		expect(await details.isVisible()).toBeTruthy();
 		await details.goBack();
-		expect(browser.isElementPresent($('my-hero-detail'))).toBe(false);
+		expect(await details.isVisible()).toBeFalsy();
 	});
 
 	it('should delete a hero', async () => {
@@ -72,6 +71,6 @@ describe('Heroes view', () => {
 	});
 
 	it('should display heroes in an ascending order', async () => {
-		expect(isSorted(await heroesPage.xxx())).toBe(true);
+		expect(isSorted(await heroesPage.getAllIds())).toBe(true);
 	});
 });

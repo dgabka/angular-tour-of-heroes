@@ -8,6 +8,7 @@ export class HeroesPage {
 	addHeroButton = element(by.partialButtonText('Add'));
 	viewDetailsButton = element(by.partialButtonText('View Details'));
 	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
+	details = element(by.css('my-hero-detail'));
 
 	navigateTo(): Promise<void> {
 		return allure.step('Go to heroes', () =>
@@ -56,7 +57,7 @@ export class HeroesPage {
 			this.heroes.get(index).$('.delete-button').click());
 	}
 
-	async xxx() {
+	async getAllIds(): Promise<string[]> {
 		const x = [];
 		await this.heroes.each(e => x.push(e.$('.badge').getText()));
 		return Promise.all(x);
