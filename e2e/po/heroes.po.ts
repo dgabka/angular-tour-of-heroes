@@ -1,6 +1,5 @@
 import {browser, by, element} from 'protractor';
 import {allure} from '../allure-reporter';
-import {getWhenVisible} from '../helpers';
 import {Step} from '../step';
 
 export class HeroesPage {
@@ -36,7 +35,7 @@ export class HeroesPage {
 
 	@Step('Get name of hero #%d')
 	async getHeroName(index: number): Promise<string> {
-		return (await getWhenVisible(this.heroes.get(index))).$('.hero-element')
+		return this.heroes.get(index).$('.hero-element')
 			.getText().then(string => string.replace(/\d+ /, ''));
 	}
 

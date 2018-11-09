@@ -1,5 +1,4 @@
 import {browser, by, element} from 'protractor';
-import {clickWhenClickable, getWhenVisible} from '../helpers';
 import {Step} from '../step';
 
 export class DashboardPage {
@@ -16,7 +15,7 @@ export class DashboardPage {
 
 	@Step('Get dashboard header')
 	async getHeader(): Promise<string> {
-		return (await getWhenVisible(this.header)).getText();
+		return this.header.getText();
 	}
 
 	@Step(`Input %s into search input`)
@@ -26,12 +25,12 @@ export class DashboardPage {
 
 	@Step(`Get name of hero #%d`)
 	async getHeroName(index: number): Promise<string> {
-		return (await getWhenVisible(this.topHeroes.get(index))).getText();
+		return this.topHeroes.get(index).getText();
 	}
 
 	@Step('Click on hero #%d')
 	async clickOnHero(index: number): Promise<void> {
-		return clickWhenClickable(this.topHeroes.get(index));
+		return this.topHeroes.get(index).click();
 	}
 
 	@Step('Click on first search result')
@@ -41,6 +40,6 @@ export class DashboardPage {
 
 	@Step('Get search results')
 	async getSearchResults(): Promise<void> {
-		return getWhenVisible(this.searchResult.first());
+		return this.searchResult.first();
 	}
 }
