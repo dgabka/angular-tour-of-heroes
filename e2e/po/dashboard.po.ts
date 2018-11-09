@@ -38,4 +38,9 @@ export class DashboardPage {
 	async clickOnFirstSearchResult(): Promise<void> {
 		return this.searchResult.first().click();
 	}
+
+	@Step('Get search results')
+	async getSearchResults(): Promise<void> {
+		return getWhenVisible(this.searchResult.first());
+	}
 }

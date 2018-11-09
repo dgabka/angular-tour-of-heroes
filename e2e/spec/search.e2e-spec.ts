@@ -1,7 +1,6 @@
-import { DashboardPage } from '../po/dashboard.po';
-import { DefaultPage } from '../po/app.po';
-import { browser, $ } from 'protractor';
-import { HeroDetails } from '../po/hero-details.po';
+import {DashboardPage} from '../po/dashboard.po';
+import {DefaultPage} from '../po/app.po';
+import {HeroDetails} from '../po/hero-details.po';
 
 describe('Search component', () => {
 	let dashboard: DashboardPage;
@@ -19,7 +18,7 @@ describe('Search component', () => {
 	it('should display search results when provided with input', async () => {
 		const name: string = await dashboard.getHeroName(0);
 		await dashboard.search(name);
-		expect(await browser.isElementPresent($('.search-result'))).toBe(true);
+		expect(await dashboard.getSearchResults()).toBeTruthy();
 		expect(await dashboard.searchResult.count()).toBeGreaterThanOrEqual(1);
 	});
 
@@ -28,8 +27,6 @@ describe('Search component', () => {
 		const name: string  = await dashboard.getHeroName(0);
 		await dashboard.search(name);
 		await dashboard.clickOnFirstSearchResult();
-		await browser.waitForAngular();
-		expect(await browser.getCurrentUrl()).toContain('detail');
 		expect(await heroDetails.getName()).toBe(name);
 	});
 });
