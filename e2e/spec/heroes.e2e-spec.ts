@@ -1,6 +1,6 @@
-import { HeroesPage } from '../po/heroes.po';
-import { HeroDetails } from '../po/hero-details.po';
-import { isSorted } from '../helpers';
+import {HeroesPage} from '../po/heroes.po';
+import {HeroDetails} from '../po/hero-details.po';
+import {isSorted} from '../helpers';
 
 describe('Heroes view', () => {
 	let heroesPage: HeroesPage;
@@ -37,7 +37,8 @@ describe('Heroes view', () => {
 	it('should add a new hero', async () => {
 		const numberOfHeroes: number = await heroesPage.heroes.count();
 		await heroesPage.clickAddHero();
-		await details.inputAndSubmit('Dawid');
+		await details.inputString('Dawid');
+		await details.submit();
 		expect(await heroesPage.heroes.count()).toEqual(numberOfHeroes + 1);
 		expect(await heroesPage.getLastHeroName()).toEqual('Dawid');
 	});
@@ -45,7 +46,8 @@ describe('Heroes view', () => {
 	it('should not add hero with an empty name', async () => {
 		const numberOfHeroes: number = await heroesPage.getHeroesNumber();
 		await heroesPage.clickAddHero();
-		await details.inputAndSubmit('');
+		await details.inputString('');
+		await details.submit();
 		expect(await heroesPage.getHeroesNumber()).toBe(numberOfHeroes, 'Invalid name: Hero has been created with empty name');
 	});
 
@@ -53,7 +55,8 @@ describe('Heroes view', () => {
 		const numberOfHeroes: number = await heroesPage.getHeroesNumber();
 		const name: string  = await heroesPage.getHeroName(3);
 		await heroesPage.clickAddHero();
-		await details.inputAndSubmit(name);
+		await details.inputString(name);
+		await details.submit();
 		expect(await heroesPage.getHeroesNumber()).toBe(numberOfHeroes, 'Invalid name: Hero has been created with a duplicated name');
 	});
 

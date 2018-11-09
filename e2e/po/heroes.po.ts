@@ -1,57 +1,56 @@
-import { element, by, browser, $$ } from 'protractor';
-import { allure } from '../allure-reporter';
-import { getWhenVisible } from '../helpers';
-import { Step } from '../step';
+import {browser, by, element} from 'protractor';
+import {allure} from '../allure-reporter';
+import {getWhenVisible} from '../helpers';
+import {Step} from '../step';
 
 export class HeroesPage {
 	header = element(by.css('h2'));
 	heroes = element.all(by.css('.heroes li'));
 	addHeroButton = element(by.partialButtonText('Add'));
 	viewDetailsButton = element(by.partialButtonText('View Details'));
-	ngForFeaturesButton = element(by.partialButtonText('ngFor Features'));
 
-	navigateTo(): Promise<void> {
-		return allure.step('Go to heroes', () =>
-			browser.get('/heroes'));
+	@Step('Go to heroes')
+	async navigateTo(): Promise<void> {
+		return browser.get('/heroes');
 	}
 
+	@Step('Get Heroes header')
 	async getHeader(): Promise<string> {
 		return this.header.getText();
 	}
 
-	clickOnHero(index: number): Promise<void> {
-		return allure.step(`Select hero #${index + 1}`, () =>
-			this.heroes.get(index).click()
-		);
+	@Step('Select hero #%d')
+	async clickOnHero(index: number): Promise<void> {
+		return this.heroes.get(index).click();
 	}
 
-	clickViewDetails(): Promise<void> {
-		return allure.step(`Click view details`, () =>
-			this.viewDetailsButton.click()
-		);
+	@Step(`Click view details`)
+	async clickViewDetails(): Promise<void> {
+		return this.viewDetailsButton.click();
 	}
 
-	clickAddHero(): Promise<void> {
-		return allure.step('Click "Add New Hero"', () =>
-			this.addHeroButton.click());
+	@Step('Click "Add New Hero"')
+	async clickAddHero(): Promise<void> {
+		return this.addHeroButton.click();
 	}
 
-	getHeroName(index: number): Promise<string> {
-		return allure.step(`Get name of hero #${index + 1}`, async () =>
-			(await getWhenVisible(this.heroes.get(index))).$('.hero-element').getText().then(string => string.replace(/\d+ /, ''))
-		);
+	@Step('Get name of hero #%d')
+	async getHeroName(index: number): Promise<string> {
+		return (await getWhenVisible(this.heroes.get(index))).$('.hero-element')
+			.getText().then(string => string.replace(/\d+ /, ''));
 	}
 
-	getLastHeroName(): Promise<string> {
-		return allure.step('Get last hero name', () =>
-			this.heroes.count().then(i => this.getHeroName(i - 1)));
+	@Step('Get last hero name')
+	async getLastHeroName(): Promise<string> {
+		return this.heroes.count().then(i => this.getHeroName(i - 1));
 	}
 
-	getHeroesNumber(): Promise<number> {
-		return allure.step('Get number of heroes', () =>
-			this.heroes.count());
+	@Step('Get number of heroes')
+	async getHeroesNumber(): Promise<number> {
+		return this.heroes.count();
 	}
 
+	@Step('Delete hero #%d')
 	deleteHero(index: number): Promise<void> {
 		return allure.step(`Delete hero #${index + 1}`, () =>
 			this.heroes.get(index).$('.delete-button').click());

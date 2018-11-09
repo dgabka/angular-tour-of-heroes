@@ -1,4 +1,4 @@
-import { ElementFinder, browser, ExpectedConditions } from 'protractor';
+import {browser, ElementFinder, ExpectedConditions} from 'protractor';
 
 export function isSorted(list: Array<string> | Array<number>): boolean {
 	for (let i = 0; i < list.length - 1; i++) {
@@ -16,5 +16,5 @@ export async function getWhenVisible(element: ElementFinder, timeout: number = 2
 
 export async function clickWhenClickable(element: ElementFinder, timeout: number = 2000): Promise<void> {
 	await browser.wait(ExpectedConditions.elementToBeClickable(element), timeout);
-	element.click();
+	return element.click();
 }

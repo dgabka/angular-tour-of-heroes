@@ -1,7 +1,7 @@
-import { element, by, browser } from 'protractor';
-import { allure } from '../allure-reporter';
-import { protractor, $ } from 'protractor/';
-import { clickWhenClickable, getWhenVisible } from '../helpers';
+import {browser, by, element} from 'protractor';
+import {$, protractor} from 'protractor/';
+import {clickWhenClickable, getWhenVisible} from '../helpers';
+import {Step} from '../step';
 
 export class HeroDetails {
 	header = element(by.css('my-hero-detail h2'));
@@ -9,39 +9,41 @@ export class HeroDetails {
 	saveButton = element(by.partialButtonText('Save'));
 	backButton = element(by.partialButtonText('Back'));
 
-	async getName(): Promise<string | boolean> {
+	@Step('Get name of hero')
+	async getName(): Promise<string> {
 		return (await getWhenVisible(this.header)).getText().then(name => name.replace(' details!', ''));
 	}
 
+	@Step('Check if hero details element is visible')
 	async isVisible(): Promise<boolean> {
 		return browser.isElementPresent($('my-hero-detail'));
 	}
 
-	clearInputField(): Promise<void> {
-		return allure.step('Clear input field', async () => (await getWhenVisible(this.input)).clear());
+	@Step('Clear input field')
+	async clearInputField(): Promise<void> {
+		return (await getWhenVisible(this.input)).clear();
 	}
 
-	async inputAndSubmit(name: string): Promise<void> {
-		await allure.step(`Input "${name}" into "name" field`, () =>
-			this.input.sendKeys(name));
-		return this.submit();
+	@Step(`Input %s into "name" field`)
+	async inputString(name: string): Promise<void> {
+		return this.input.sendKeys(name);
 	}
 
-	clearWithBackspace(length: number): Promise<void> {
-		return allure.step(`Clear input field with backspace`, async () => {
-			await getWhenVisible(this.input);
-			for (let i = 0; i < length; i++) {
-				await this.input.sendKeys(protractor.Key.BACK_SPACE);
-			}
-		});
+	@Step(`Clear input field with backspace`)
+	async clearWithBackspace(length: number): Promise<void> {
+		await getWhenVisible(this.input);
+		for (let i = 0; i < length; i++) {
+			await this.input.sendKeys(protractor.Key.BACK_SPACE);
+		}
 	}
 
-	submit(): Promise<void> {
-		return allure.step('Click "Save" button', () => this.saveButton.click());
+	@Step('Click "Save" button')
+	async submit(): Promise<void> {
+		return this.saveButton.click();
 	}
 
-	goBack(): Promise<void> {
-		return allure.step('Click "Back" button', async () =>
-			await clickWhenClickable(this.backButton));
+	@Step('Click "Back" button')
+	async goBack(): Promise<void> {
+		return clickWhenClickable(this.backButton);
 	}
 }

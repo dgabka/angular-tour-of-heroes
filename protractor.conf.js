@@ -19,7 +19,7 @@ exports.config = {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
-    require('./e2e/allure-reporter').allure;
+	  require('./e2e/allure-reporter');
   },
   SELENIUM_PROMISE_MANAGER: false
 };
