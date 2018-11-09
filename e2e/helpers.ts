@@ -1,5 +1,3 @@
-import {browser, ElementFinder, ExpectedConditions} from 'protractor';
-
 export function isSorted(list: Array<string> | Array<number>): boolean {
 	for (let i = 0; i < list.length - 1; i++) {
 		if (+list[i] >= +list[i + 1]) {
@@ -9,12 +7,14 @@ export function isSorted(list: Array<string> | Array<number>): boolean {
 	return true;
 }
 
-export async function getWhenVisible(element: ElementFinder, timeout: number = 2000): Promise<ElementFinder> {
-	await browser.wait(ExpectedConditions.visibilityOf(element), timeout);
-	return element;
-}
-
-export async function clickWhenClickable(element: ElementFinder, timeout: number = 2000): Promise<void> {
-	await browser.wait(ExpectedConditions.elementToBeClickable(element), timeout);
-	return element.click();
+/**
+ *    @param millis    number of milliseconds to pause the test for
+ *    @returns        {Promise<void>}
+ */
+export async function sleep(millis: number): Promise<any> {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve(true);
+		}, millis);
+	});
 }
