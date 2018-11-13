@@ -57,8 +57,7 @@ export class HeroesPage {
 
 	@Step('Get all heroes\' ids')
 	async getAllIds(): Promise<string[]> {
-		const x = [];
-		await this.heroes.each(e => x.push(e.$('.badge').getText()));
+		const x: any[] = await this.heroes.map(e => e.$('.badge').getText());
 		return Promise.all(x);
 	}
 }
