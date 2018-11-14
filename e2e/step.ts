@@ -6,13 +6,19 @@ export function Step(name: string) {
 		let callable;
 
 		descriptor.value = function (...args) {
-			const count = (name.match(/%/g) || []).length;
-			if (count > 0) {
-				const values = args.slice().reverse();
-				for (let i = 0; i < count; i++) {
-					name = name.replace(/%[ds]/, values.pop());
+			const countNum = (name.match(/%d/g) || []).length;
+			const countStr = (name.match(/%s/g) || []).length;
+			if (countNum + countStr > 0) {
+				const strings = args.filter(e => typeof e === 'string').reverse();
+				const numbers = args.filter(e => typeof e === 'number').reverse();
+				for (let i = 0; i < Math.max(countStr, countNum); i++) {
+					name = name.replace(/%s/, strings.pop());
+					name = name.replace(/%d/, numbers.pop());
 				}
 			}
+
+			console.log(name);
+
 			callable = () => allure.step(name, () => method.apply(this, args));
 			return callable.apply(this, args);
 		};
